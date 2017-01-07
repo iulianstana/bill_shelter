@@ -1,0 +1,13 @@
+.idea
+
+*.swp
+*.pyc
+*.pyo
+*.mo
+
+app.db
+search.db
+test.db
+
+db_repository
+sandbox

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: white;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            td {
+                width: 25%;
+            }
+
+            table, td, th {
+                border: 1.5px solid black;
+            }
+            p {
+                display: block;
+                margin-top: 5px;
+                margin-bottom: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .split-para      { display:block; margin:10px;}
+            .split-para span { display:block; float:right; margin-left:10px;}
+        </style>
+        <title> Welcome to water_notice </title>
+    </head>
+    <body>
+
+
+
+<p style="text-align:center; font-weight:bold; text-decoration: underline;">INSTIINTARE LUNARA</p>
+<p align="center">DE LA: APARTAMENT / SPATIU NR <u style="font-weight: bold">{{ nr_apartament }}</u></p>
+<p> CATRE: ASOCIATIA DE PROPRIETARI BLOC L11</p>
+<p align="right">PENTRU CONSUM: CONSUM INDIVIDUAL <u style="font-weight: bold">{{ tip_apa }}</u></p>
+<br/>
+<p>NR <u> {{numar}} </u> PERIOADA <u>{{start_time}}</u>  - <u>{{end_time}}</u></p>
+<br/>
+<table>
+    <tr>
+        <th>Pozitie contor</th>
+        <th>Index vechi</th>
+        <th>Index nou</th>
+        <th>Consum [m.c.]</th>
+    </tr>
+    <tr>
+        <td>Bucatarie</td>
+        <td>{{buc_index_vechi}}</td>
+        <td>{{buc_index_now}}</td>
+        <td>{{buc_consum}}</td>
+    </tr>
+    <tr>
+        <td>Baie</td>
+        <td>{{baie_index_vechi}}</td>
+        <td>{{baie_index_now}}</td>
+        <td>{{baie_consum}}</td>
+    </tr>
+    <tr>
+        <td>Total</td>
+        <td></td>
+        <td></td>
+        <td>{{total_consum}}</td>
+    </tr>
+</table>
+<p>NOTA: SE COMPLETEAZA IN 2 EXEMPLARE, CATE UNUL PENTRU PROPRIETAR SI ASOCIATIE</p>
+<br/>
+<p>DATA <u>{{data_completare}}</u></p>
+<p class="split-para">SEMNATURA proprietar/chirias,<span>Semnatura primire,</span></p>
+<br/>
+<br/>
+<br/>
+
+    </body>
+</html>

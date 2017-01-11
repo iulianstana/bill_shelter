@@ -15,6 +15,7 @@
 
             table, td, th {
                 border: 1.5px solid black;
+                height: 30px;
             }
             p {
                 display: block;
@@ -22,6 +23,7 @@
                 margin-bottom: 0;
                 margin-left: 0;
                 margin-right: 0;
+                white-space: pre;
             }
             .split-para      { display:block; margin:10px;}
             .split-para span { display:block; float:right; margin-left:10px;}
@@ -33,11 +35,11 @@
 
 
 <p style="text-align:center; font-weight:bold; text-decoration: underline;">INSTIINTARE LUNARA</p>
-<p align="center">DE LA: APARTAMENT / SPATIU NR <u style="font-weight: bold">{{ nr_apartament }}</u></p>
+<p align="center">DE LA: APARTAMENT / SPATIU NR <u style="font-weight: bold">  {{ result.nr_apartment }}  </u></p>
 <p> CATRE: ASOCIATIA DE PROPRIETARI BLOC L11</p>
-<p align="right">PENTRU CONSUM: CONSUM INDIVIDUAL <u style="font-weight: bold">{{ tip_apa }}</u></p>
+<p align="right">PENTRU CONSUM: CONSUM INDIVIDUAL <u style="font-weight: bold">{{ result.type }}</u></p>
 <br/>
-<p>NR <u> {{numar}} </u> PERIOADA <u>{{start_time}}</u>  - <u>{{end_time}}</u></p>
+<p>NR <u> {{ result.notice_number }} </u> PERIOADA <u>{{ result.start_time }}</u>  - <u>{{ result.end_time }}</u></p>
 <br/>
 <table>
     <tr>
@@ -48,26 +50,26 @@
     </tr>
     <tr>
         <td>Bucatarie</td>
-        <td>{{buc_index_vechi}}</td>
-        <td>{{buc_index_now}}</td>
-        <td>{{buc_consum}}</td>
+        <td>{{ result.kitchen_old }}</td>
+        <td>{{ result.kitchen_new }}</td>
+        <td>{{ result.kitchen_new - result.kitchen_old }}</td>
     </tr>
     <tr>
         <td>Baie</td>
-        <td>{{baie_index_vechi}}</td>
-        <td>{{baie_index_now}}</td>
-        <td>{{baie_consum}}</td>
+        <td>{{ result.bath_old }}</td>
+        <td>{{ result.bath_new }}</td>
+        <td>{{ result.bath_new - result.bath_old}}</td>
     </tr>
     <tr>
         <td>Total</td>
         <td></td>
         <td></td>
-        <td>{{total_consum}}</td>
+        <td>{{ result.bath_new - result.bath_old + result.kitchen_new - result.kitchen_old }}</td>
     </tr>
 </table>
 <p>NOTA: SE COMPLETEAZA IN 2 EXEMPLARE, CATE UNUL PENTRU PROPRIETAR SI ASOCIATIE</p>
 <br/>
-<p>DATA <u>{{data_completare}}</u></p>
+<p>DATA <u>{{ result.completed_date }}</u></p>
 <p class="split-para">SEMNATURA proprietar/chirias,<span>Semnatura primire,</span></p>
 <br/>
 <br/>

@@ -32,48 +32,10 @@
     </head>
     <body>
 
-
-
-<p style="text-align:center; font-weight:bold; text-decoration: underline;">INSTIINTARE LUNARA</p>
-<p align="center">DE LA: APARTAMENT / SPATIU NR <u style="font-weight: bold">  {{ result.nr_apartment }}  </u></p>
-<p> CATRE: ASOCIATIA DE PROPRIETARI BLOC L11</p>
-<p align="right">PENTRU CONSUM: CONSUM INDIVIDUAL <u style="font-weight: bold">{{ result.type }}</u></p>
-<br/>
-<p>NR <u> {{ result.notice_number }} </u> PERIOADA <u>{{ result.start_time }}</u>  - <u>{{ result.end_time }}</u></p>
-<br/>
-<table>
-    <tr>
-        <th>Pozitie contor</th>
-        <th>Index vechi</th>
-        <th>Index nou</th>
-        <th>Consum [m.c.]</th>
-    </tr>
-    <tr>
-        <td>Bucatarie</td>
-        <td>{{ result.kitchen_old }}</td>
-        <td>{{ result.kitchen_new }}</td>
-        <td>{{ result.kitchen_new - result.kitchen_old }}</td>
-    </tr>
-    <tr>
-        <td>Baie</td>
-        <td>{{ result.bath_old }}</td>
-        <td>{{ result.bath_new }}</td>
-        <td>{{ result.bath_new - result.bath_old}}</td>
-    </tr>
-    <tr>
-        <td>Total</td>
-        <td></td>
-        <td></td>
-        <td>{{ result.bath_new - result.bath_old + result.kitchen_new - result.kitchen_old }}</td>
-    </tr>
-</table>
-<p>NOTA: SE COMPLETEAZA IN 2 EXEMPLARE, CATE UNUL PENTRU PROPRIETAR SI ASOCIATIE</p>
-<br/>
-<p>DATA <u>{{ result.completed_date }}</u></p>
-<p class="split-para">SEMNATURA proprietar/chirias,<span>Semnatura primire,</span></p>
-<br/>
-<br/>
-<br/>
+    {% for notice in notices %}
+        {% include 'type_notice.html' %}
+        <br><br><br>
+    {% endfor %}
 
     </body>
 </html>

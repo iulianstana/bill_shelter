@@ -32,6 +32,11 @@
     </head>
     <body>
 
+    <form action="{{ url_for('save_pdf') }}" method="POST">
+        <input type="text" name="start_time" value="Ianuarie" hidden/>
+        <p><input type="submit" value="save"></p>
+    </form>
+
     {% for notice in notices %}
         {% include 'type_notice.html' %}
         <br><br><br>

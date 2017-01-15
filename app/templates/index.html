@@ -1,0 +1,19 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> Hello Iulian </h1>
+
+    <select class="selectpicker">
+        {% for notice in month_notice %}
+            <option> {{ notice.datetime }} </option>
+        {% endfor %}
+    </select>
+
+    <select class="selectpicker">
+        {% for notice in month_notice %}
+            <option> {{ notice.datetime }} </option>
+        {% endfor %}
+    </select>
+
+{% endblock %}

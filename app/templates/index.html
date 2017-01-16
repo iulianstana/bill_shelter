@@ -4,16 +4,42 @@
 {% block content %}
     <h1> Hello Iulian </h1>
 
-    <select class="selectpicker">
-        {% for notice in month_notice %}
-            <option> {{ momentjs(notice.datetime).format('LL') }} </option>
-        {% endfor %}
-    </select>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#settings">Settings</a></li>
+            <li><a data-toggle="tab" href="#preview">Preview</a></li>
+        </ul>
 
-    <select class="selectpicker">
-        {% for notice in month_notice %}
-            <option> {{ momentjs(notice.datetime).format('LL') }} </option>
-        {% endfor %}
-    </select>
+        <div class="tab-content">
+            <div id="settings" class="tab-pane fade in active">
+                <h3>Settings</h3>
 
+                <select class="selectpicker" id="old">
+                    {% for notice in month_notice %}
+                        <option value="{{ notice.id }}"> {{ momentjs(notice.datetime).format('LL') }} </option>
+                    {% endfor %}
+                </select>
+
+                <select class="selectpicker" id="new">
+                    {% for notice in month_notice %}
+                        <option value="{{ notice.id }}"> {{ momentjs(notice.datetime).format('LL') }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div id="preview" class="tab-pane fade">
+                <span id="preview_span"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+    $(document).ready(function(){
+        $('.nav-tabs a[href="#preview"]').click(function(){
+            var e = document.getElementById("old")
+            var select_old_value = e.options[e.selectedIndex].text;
+            var e = document.getElementById("new")
+            var select_new_value = e.options[e.selectedIndex].text;
+            $('#preview_span').text("Starting from " + select_old_value + " to " + select_new_value);
+        });
+    });
+    </script>
 {% endblock %}

@@ -6,13 +6,13 @@
 
     <select class="selectpicker">
         {% for notice in month_notice %}
-            <option> {{ notice.datetime }} </option>
+            <option> {{ momentjs(notice.datetime).format('LL') }} </option>
         {% endfor %}
     </select>
 
     <select class="selectpicker">
         {% for notice in month_notice %}
-            <option> {{ notice.datetime }} </option>
+            <option> {{ momentjs(notice.datetime).format('LL') }} </option>
         {% endfor %}
     </select>
 

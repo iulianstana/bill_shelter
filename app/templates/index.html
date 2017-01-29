@@ -1,6 +1,47 @@
 <!-- extend base layout -->
 {% extends "base.html" %}
 
+{% block scripts %}
+    <style>
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        @page {
+            size: A4;
+            margin: 0;
+        }
+    </style>
+    <script>
+    function preview_notice(select_old_value, select_new_value) {
+        $.post('/demo_notice', {
+            old_month: select_old_value,
+            new_month: select_new_value,
+        }).done(function(notice) {
+            document.getElementById("content").innerHTML = notice['innerhtml']
+        }).fail(function() {
+            alert("Some error occur!");
+        });
+    }
+    $(document).ready(function(){
+        $('.nav-tabs a[href="#preview"]').click(function(){
+            var e = document.getElementById("old");
+            var select_old_value = String(e.options[e.selectedIndex].value);
+            var e = document.getElementById("new");
+            var select_new_value = e.options[e.selectedIndex].value;
+
+            preview_notice(select_old_value, select_new_value);
+        });
+    });
+    </script>
+{% endblock %}
+
 {% block content %}
     <h1> Hello Iulian </h1>
 
@@ -27,19 +68,9 @@
                 </select>
             </div>
             <div id="preview" class="tab-pane fade">
-                <span id="preview_span"></span>
+                <div id="content" class="page"> </div>
             </div>
         </div>
     </div>
-    <script>
-    $(document).ready(function(){
-        $('.nav-tabs a[href="#preview"]').click(function(){
-            var e = document.getElementById("old")
-            var select_old_value = e.options[e.selectedIndex].text;
-            var e = document.getElementById("new")
-            var select_new_value = e.options[e.selectedIndex].text;
-            $('#preview_span').text("Starting from " + select_old_value + " to " + select_new_value);
-        });
-    });
-    </script>
+
 {% endblock %}

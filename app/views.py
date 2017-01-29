@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, jsonify
 from pdfkit import from_string
 
 from app import app, db
@@ -44,9 +44,19 @@ def index():
     return render_template('index.html', month_notice=month_notice)
 
 
-@app.route('/demo_notice', methods=['GET'])
+@app.route('/demo_notice', methods=['POST'])
 def demo_notice():
-    cold_notice = get_notice_data(1139.472, 1145.128, 226.892, 227.515, 'APA RECE')
-    hot_notice = get_notice_data(632.34, 635.287, 351.359, 352.355, 'APA CALDA')
+    old_month = MonthNotice.query.get(int(request.form['old_month']))
+    new_month = MonthNotice.query.get(int(request.form['new_month']))
+    cold_notice = get_notice_data(1139.472,
+                                  1145.128,
+                                  226.892,
+                                  227.515,
+                                  'APA RECE')
+    hot_notice = get_notice_data(632.34,
+                                 635.287,
+                                 351.359,
+                                 352.355,
+                                 'APA CALDA')
     render_obj = render_template('water_notice.html', notices=[cold_notice, hot_notice])
-    return render_obj
+    return jsonify({'innerhtml': render_obj})

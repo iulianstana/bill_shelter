@@ -18,3 +18,7 @@ pdf_options = {
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+
+month_list = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie',
+              'Mai', 'Iunie', 'Iulie', 'August',
+              'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie']

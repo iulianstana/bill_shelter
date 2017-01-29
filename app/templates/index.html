@@ -57,7 +57,7 @@
 
                 <select class="selectpicker" id="old">
                     {% for notice in month_notice %}
-                        <option value="{{ notice.id }}"> {{ momentjs(notice.datetime).format('LL') }} </option>
+                        <option value="{{ notice.id }}" {% if loop.index0 == 1 %} selected="selected" {% endif %}>  {{ momentjs(notice.datetime).format('LL') }} </option>
                     {% endfor %}
                 </select>
 

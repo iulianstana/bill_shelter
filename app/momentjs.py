@@ -1,4 +1,8 @@
+from datetime import datetime
+
 from jinja2 import Markup
+
+from config import month_list
 
 
 class momentjs(object):
@@ -17,3 +21,7 @@ class momentjs(object):
 
     def fromNow(self):
         return self.render("fromNow()")
+
+
+def convert_datetime_to_lang_month(month_time):
+    return month_list[month_time.month - 1]

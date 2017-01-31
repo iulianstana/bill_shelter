@@ -7,7 +7,7 @@ from pdfkit import from_string
 from app import app, db
 from config import pdf_options, indent_const, ap_number
 
-from .models import MonthNotice
+from .models import MonthNotice, Notice
 from .momentjs import convert_datetime_to_lang_month, default_notice
 from .forms import NoticeForm
 
@@ -43,10 +43,28 @@ def save_pdf():
 
 @app.route('/new_water_notice', methods=['GET', 'POST'])
 def new_water_notice():
-    notice_form = NoticeForm()
-    if notice_form.validate_on_submit():
+    form = NoticeForm()
+    if form.validate_on_submit():
+        hot = Notice(type="APA CALDA",
+                     bath_index=form.hot_water_bath.data,
+                     kitchen_index=form.hot_water_kitchen.data,
+                     datetime=form.notice_time.data)
+        cold = Notice(type="APA RECE",
+                      bath_index=form.cold_water_bath.data,
+                      kitchen_index=form.cold_water_kitchen.data,
+                      datetime=form.notice_time.data)
+
+        month_notice = MonthNotice(cold_notice=cold,
+                                   hot_notice=hot,
+                                   datetime=form.notice_time.data)
+
+        db.session.add(hot)
+        db.session.add(cold)
+        db.session.add(month_notice)
+        db.session.commit()
+
         return redirect(url_for('index'))
-    return render_template('new_water_notice.html', form=notice_form)
+    return render_template('new_water_notice.html', form=form)
 
 
 @app.route('/', methods=['GET'])

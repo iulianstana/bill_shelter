@@ -14,6 +14,7 @@ pdf_options = {
     'margin-bottom': '0.75in',
     'margin-left': '0.75in',
 }
+notice_output = "water_shelter"
 
 indent_const = {
     'notice_number': 6,

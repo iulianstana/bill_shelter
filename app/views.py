@@ -1,14 +1,13 @@
-import os
 from datetime import datetime
 
 from flask import render_template, redirect, url_for, request, jsonify
 from sqlalchemy import desc
-from pdfkit import from_string
 
 from app import app, db
-from config import pdf_options, indent_const, ap_number
+from config import indent_const, ap_number
 
 from .models import MonthNotice, Notice
+from .pdf_wrapper import save_notice
 from .momentjs import convert_datetime_to_lang_month, default_notice
 from .forms import NoticeForm
 
@@ -37,14 +36,14 @@ def save_pdf():
     new_month = MonthNotice.query.get(int(request.form['new_month']))
     cold_notice = get_notice_data(old_month.cold_notice, new_month.cold_notice)
     hot_notice = get_notice_data(old_month.hot_notice, new_month.hot_notice)
-    render_obj = render_template('water_notice.html', notices=[cold_notice, hot_notice])
+    render_string = render_template('water_notice.html', notices=[cold_notice, hot_notice])
 
     # save to pdf and redirect to index
     # <number>_<YEAR-MONTH>_<YEAR-MONTH>.pdf ex: 8_2016-12_2017-12.pdf
     pdf_name = "%d_%s_%s.pdf" % (default_notice(new_month.datetime),
-                             old_month.datetime.strftime("%Y-%m"),
-                             new_month.datetime.strftime("%Y-%m"),)
-    from_string(render_obj, os.path.join("water_shelter", pdf_name), options=pdf_options)
+                                 old_month.datetime.strftime("%Y-%m"),
+                                 new_month.datetime.strftime("%Y-%m"),)
+    save_notice(render_string, pdf_name)
     return redirect(url_for('index'))
 
 

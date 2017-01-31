@@ -1,0 +1,61 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> Create New Water Notice </h1>
+    <div class="well">
+        <form class="form-horizontal" action="" method="post" name="edit">
+            {{ form.hidden_tag() }}
+            <div class="control-group{% if form.cold_water_bath.errors %} error{% endif %}">
+                <label class="control-label" for="cold_water_bath"> Cold Water Bath: </label>
+                <div class="controls">
+                    {{ form.cold_water_bath(maxlength=30, class="span4") }}
+                    {% for error in form.cold_water_bath.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="control-group{% if form.cold_water_kitchen.errors %} error{% endif %}">
+                <label class="control-label" for="cold_water_kitchen"> Cold Water Kitchen: </label>
+                <div class="controls">
+                    {{ form.cold_water_kitchen(maxlength=30, class="span4") }}
+                    {% for error in form.cold_water_kitchen.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="control-group{% if form.hot_water_bath.errors %} error{% endif %}">
+                <label class="control-label" for="hot_water_bath"> Hot Water Bath: </label>
+                <div class="controls">
+                    {{ form.hot_water_bath(maxlength=30, class="span4") }}
+                    {% for error in form.hot_water_bath.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="control-group{% if form.hot_water_kitchen.errors %} error{% endif %}">
+                <label class="control-label" for="hot_water_kitchen"> Hot Water Kitchen: </label>
+                <div class="controls">
+                    {{ form.hot_water_kitchen(maxlength=30, class="span4") }}
+                    {% for error in form.hot_water_kitchen.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="control-group{% if form.notice_time.errors %} error{% endif %}">
+                <label class="control-label" for="notice_time"> Notice Time: </label>
+                <div class="controls">
+                    {{ form.notice_time(maxlength=30, class="span4") }}
+                    {% for error in form.notice_time.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input class="btn btn-primary" type="submit" value="Save">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

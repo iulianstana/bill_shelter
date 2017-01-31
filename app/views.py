@@ -8,11 +8,11 @@ from app import app, db
 from config import pdf_options
 
 from models import MonthNotice
-from momentjs import convert_datetime_to_lang_month
+from momentjs import convert_datetime_to_lang_month, default_notice
 
 
 def get_notice_data(old_month, new_month):
-    notice_number = '10'
+    notice_number = str(default_notice())
     current_date = datetime.now()
     result = {
         'nr_apartment': 79,

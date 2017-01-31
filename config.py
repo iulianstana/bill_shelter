@@ -22,3 +22,4 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 month_list = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie',
               'Mai', 'Iunie', 'Iulie', 'August',
               'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie']
+first_notice_date = "2016-05"

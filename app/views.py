@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 from flask import render_template, redirect, url_for, request, jsonify
@@ -13,7 +14,7 @@ from .forms import NoticeForm
 
 
 def get_notice_data(old_month, new_month):
-    notice_number = str(default_notice())
+    notice_number = str(default_notice(new_month.datetime))
     current_date = datetime.now()
     result = {
         'nr_apartment': ap_number,

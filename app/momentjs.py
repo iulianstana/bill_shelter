@@ -28,8 +28,9 @@ def convert_datetime_to_lang_month(month_time):
     return month_list[month_time.month - 1]
 
 
-def default_notice():
-    date_now = datetime.now()
+def default_notice(date_now=None):
+    if not date_now:
+        date_now = datetime.now()
     date_start = datetime.strptime(first_notice_date, "%Y-%m")
     r = relativedelta.relativedelta(date_now, date_start)
     return r.months

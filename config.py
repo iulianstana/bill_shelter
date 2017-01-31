@@ -15,6 +15,15 @@ pdf_options = {
     'margin-left': '0.75in',
 }
 
+indent_const = {
+    'notice_number': 6,
+    'time_frame': 30,
+    'type': 15,
+    'complete_date': 20,
+}
+
+ap_number = 79
+
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')

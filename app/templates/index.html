@@ -20,7 +20,7 @@
     </style>
     <script>
     function preview_notice(select_old_value, select_new_value) {
-        $.post('/demo_notice', {
+        $.post('/preview_notice', {
             old_month: select_old_value,
             new_month: select_new_value,
         }).done(function(notice) {

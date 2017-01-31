@@ -17,7 +17,7 @@ pdf_options = {
 
 indent_const = {
     'notice_number': 6,
-    'time_frame': 30,
+    'time_frame': 75,
     'type': 15,
     'complete_date': 20,
 }

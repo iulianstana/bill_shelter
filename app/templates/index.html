@@ -54,18 +54,27 @@
         <div class="tab-content">
             <div id="settings" class="tab-pane fade in active">
                 <h3>Settings</h3>
+                <div class="well">
+                <form class="form-horizontal" action="{{ url_for('save_pdf') }}" method="post">
+                    <div class="control-group">
+                        <select class="selectpicker" id="old" name="old_month">
+                            {% for notice in month_notice %}
+                                <option value="{{ notice.id }}" {% if loop.index0 == 1 %} selected="selected" {% endif %}>  {{ momentjs(notice.datetime).format('LL') }} </option>
+                            {% endfor %}
+                        </select>
+                        <select class="selectpicker" id="new" name="new_month">
+                            {% for notice in month_notice %}
+                                <option value="{{ notice.id }}"> {{ momentjs(notice.datetime).format('LL') }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-                <select class="selectpicker" id="old">
-                    {% for notice in month_notice %}
-                        <option value="{{ notice.id }}" {% if loop.index0 == 1 %} selected="selected" {% endif %}>  {{ momentjs(notice.datetime).format('LL') }} </option>
-                    {% endfor %}
-                </select>
-
-                <select class="selectpicker" id="new">
-                    {% for notice in month_notice %}
-                        <option value="{{ notice.id }}"> {{ momentjs(notice.datetime).format('LL') }} </option>
-                    {% endfor %}
-                </select>
+                    <div class="control-group">
+                        <label>Create PDF file to those settings:</label>
+                        <input class="btn btn-primary" type="submit" value="Save" >
+                    </div>
+                </form>
+                </div>
             </div>
             <div id="preview" class="tab-pane fade">
                 <div id="content" class="page"> </div>

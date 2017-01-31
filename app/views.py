@@ -33,13 +33,19 @@ def get_notice_data(old_month, new_month):
 
 @app.route('/save_pdf', methods=['GET', 'POST'])
 def save_pdf():
-    old_month = MonthNotice.query.get(1)
-    new_month = MonthNotice.query.get(2)
+    old_month = MonthNotice.query.get(int(request.form['old_month']))
+    new_month = MonthNotice.query.get(int(request.form['new_month']))
     cold_notice = get_notice_data(old_month.cold_notice, new_month.cold_notice)
     hot_notice = get_notice_data(old_month.hot_notice, new_month.hot_notice)
     render_obj = render_template('water_notice.html', notices=[cold_notice, hot_notice])
-    from_string(render_obj, "water_shelter/test.pdf", options=pdf_options)
-    return redirect(url_for('demo_notice'))
+
+    # save to pdf and redirect to index
+    # <number>_<YEAR-MONTH>_<YEAR-MONTH>.pdf ex: 8_2016-12_2017-12.pdf
+    pdf_name = "%d_%s_%s.pdf" % (default_notice(new_month.datetime),
+                             old_month.datetime.strftime("%Y-%m"),
+                             new_month.datetime.strftime("%Y-%m"),)
+    from_string(render_obj, os.path.join("water_shelter", pdf_name), options=pdf_options)
+    return redirect(url_for('index'))
 
 
 @app.route('/new_water_notice', methods=['GET', 'POST'])

@@ -38,6 +38,10 @@
 
             preview_notice(select_old_value, select_new_value);
         });
+        $("#editButton").click(function () {
+            var href = document.getElementById("month").value;
+            location.href = href;
+        });
     });
     </script>
 {% endblock %}
@@ -55,25 +59,40 @@
             <div id="settings" class="tab-pane fade in active">
                 <h3>Settings</h3>
                 <div class="well">
-                <form class="form-horizontal" action="{{ url_for('save_pdf') }}" method="post">
                     <div class="control-group">
-                        <select class="selectpicker" id="old" name="old_month">
-                            {% for notice in month_notice %}
-                                <option value="{{ notice.id }}" {% if loop.index0 == 1 %} selected="selected" {% endif %}>  {{ momentjs(notice.datetime).format('LL') }} </option>
-                            {% endfor %}
-                        </select>
-                        <select class="selectpicker" id="new" name="new_month">
-                            {% for notice in month_notice %}
-                                <option value="{{ notice.id }}"> {{ momentjs(notice.datetime).format('LL') }} </option>
-                            {% endfor %}
-                        </select>
+                        <form class="form-horizontal" action="{{ url_for('save_pdf') }}" method="post">
+                            <div class="control-group">
+                                <select class="selectpicker" id="old" name="old_month">
+                                    {% for notice in month_notice %}
+                                        <option value="{{ notice.id }}" {% if loop.index0 == 1 %} selected="selected" {% endif %}>  {{ momentjs(notice.datetime).format('LL') }} </option>
+                                    {% endfor %}
+                                </select>
+                                <select class="selectpicker" id="new" name="new_month">
+                                    {% for notice in month_notice %}
+                                        <option value="{{ notice.id }}"> {{ momentjs(notice.datetime).format('LL') }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label>Create PDF file to those settings:</label>
+                                <input class="btn btn-primary" type="submit" value="Save" >
+                            </div>
+                        </form>
                     </div>
 
+                    <hr/>
                     <div class="control-group">
-                        <label>Create PDF file to those settings:</label>
-                        <input class="btn btn-primary" type="submit" value="Save" >
+                        <label for="edit_month"> Edit Month: </label>
+                        <select class="selectpicker" id="month" name="month_id">
+                            {% for notice in month_notice %}
+                                <option value="{{ url_for('edit_water_notice', month_id=notice.id) }}"> {{ momentjs(notice.datetime).format('LL') }} </option>
+                            {% endfor %}
+                        </select>
+                        <div class="control-group">
+                            <button id="editButton" class="btn btn-primary" >Edit</button>
+                        </div>
                     </div>
-                </form>
                 </div>
             </div>
             <div id="preview" class="tab-pane fade">

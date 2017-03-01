@@ -73,6 +73,32 @@ def new_water_notice():
     return render_template('new_water_notice.html', form=form)
 
 
+@app.route('/edit_water_notice/<month_id>', methods=['GET', 'POST'])
+def edit_water_notice(month_id):
+    month_notice = MonthNotice.query.order_by(desc(MonthNotice.datetime)).limit(12).all()
+
+    form = NoticeForm()
+    if form.validate_on_submit():
+        month_obj = MonthNotice.query.get(month_id)
+        month_obj.hot_notice.bath_index = form.hot_water_bath.data
+        month_obj.hot_notice.kitchen_index = form.hot_water_kitchen.data
+        month_obj.cold_notice.bath_index = form.cold_water_bath.data
+        month_obj.cold_notice.kitchen_index = form.cold_water_kitchen.data
+        db.session.commit()
+        return redirect(url_for('index'))
+    else:
+        month_obj = MonthNotice.query.get(month_id)
+        form.hot_water_bath.data = month_obj.hot_notice.bath_index
+        form.hot_water_kitchen.data = month_obj.hot_notice.kitchen_index
+        form.cold_water_bath.data = month_obj.cold_notice.bath_index
+        form.cold_water_kitchen.data = month_obj.cold_notice.kitchen_index
+        form.notice_time.data = month_obj.datetime
+
+    return render_template('edit_water_notice.html',
+                           form=form,
+                           month_notice=month_notice)
+
+
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():

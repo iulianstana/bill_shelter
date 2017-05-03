@@ -33,4 +33,4 @@ def default_notice(date_now=None):
         date_now = datetime.now()
     date_start = datetime.strptime(first_notice_date, "%Y-%m")
     r = relativedelta.relativedelta(date_now, date_start)
-    return r.months
+    return 12 * r.years + r.months

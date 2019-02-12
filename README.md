@@ -20,6 +20,6 @@ Python dependents will are placed in requirements-pip
 
 ## Run ##
 
-TODO:
-
+docker-compose up
+TODO: 
 

@@ -1,7 +1,7 @@
 version: "2"
 services:
   webserver:
-    image: bill-shelter
+    build: .
     ports:
       - "5000:5000"
     volumes:
